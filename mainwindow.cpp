@@ -1,19 +1,27 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
+#include "QDebug"
+#include <QPainterPath>
+#include <QPainter>
+#include "player.h"
 #include "view.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    view = new View(&scene);
-    scene.setSceneRect(0,0,0,0);
+    View *view = new View(&scene);
     this->setCentralWidget(view);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
+
+
+

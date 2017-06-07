@@ -2,23 +2,40 @@
 #define VIEW_H
 #include <QGraphicsView>
 #include <QKeyEvent>
-#include <QMouseEvent>
-#include <QWheelEvent>
-#include <qevent.h>
-#include <QFileDialog>
+#include <QList>
+#include "player.h"
+#include "mainwindow.h"
+
 
 class View : public QGraphicsView
 {
+    Q_OBJECT
 public:
     View();
     View(QGraphicsScene *scene);
+    void CreateTimer();
+
+
+public slots:
+    void Update();
 
 protected:
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseWheelEvent(QGraphicsSceneWheelEvent *event);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+private:
+    int width;
+    int height;
+    Player *player;
 
-    QGraphicsItem *player;
+    QTimer *timer;
+    QGraphicsTextItem *scoreItem;
+    QGraphicsTextItem *gameOverItem;
+signals:
+
+
+
+
+
 };
 
 #endif // VIEW_H
