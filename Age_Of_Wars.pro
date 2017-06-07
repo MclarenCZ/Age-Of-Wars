@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     player.cpp \
     base.cpp \
     turret.cpp \
-    bullet.cpp
+    bullet.cpp \
+    camera.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
     player.h \
     base.h \
     turret.h \
-    bullet.h
+    bullet.h \
+    camera.h
 
 FORMS    += mainwindow.ui

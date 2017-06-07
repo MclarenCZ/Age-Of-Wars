@@ -5,7 +5,7 @@
 class Player : public QGraphicsItem
 {
 public:
-    Player(QString nazev,QColor barva,int sirka, int vyska);
+    Player();
     QRectF boundingRect() const;
 
 protected:
@@ -13,10 +13,8 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
-    QColor barva;
-    QString nazev;
-    int sirka;
-    int vyska;
+    int sirka = 20;
+    int vyska = 30;
 };
 
 #endif // PLAYER_H
