@@ -1,11 +1,11 @@
-#ifndef BASE_H
-#define BASE_H
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <QGraphicsItem>
 
-class Base : public QGraphicsItem
+class Player : public QGraphicsItem
 {
 public:
-    Base();
+    Player();
     QRectF boundingRect() const;
 
 protected:
@@ -13,8 +13,8 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
-    int sirka = 100;
-    int vyska = 100;
+    int sirka = 20;
+    int vyska = 30;
 };
 
-#endif // BASE_H
+#endif // PLAYER_H

@@ -37,6 +37,8 @@ private:
     Player *player;
     Base *mybase;
     Base *enemybase;
+    QList<Player *> playerList;
+    QList<Player *> enemyList;
 
     QTimer *timer;
     QGraphicsTextItem *scoreItem;

@@ -6,12 +6,8 @@
 #include "view.h"
 #include "mainwindow.h"
 
-Player::Player(QString nazev, QColor barva, int sirka, int vyska)
+Player::Player()
 {
-    this->barva = barva;
-    this->nazev = nazev;
-    this->sirka = sirka - 1;
-    this->vyska = vyska - 1;
     setTransformOriginPoint(sirka/2, sirka/2);
 }
 
@@ -29,6 +25,7 @@ QPainterPath Player::shape() const
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QImage image("../Textures/"+nazev);//nazev je nazev souboru i s priponou
-    painter->drawImage(QPoint(0,0),image.scaled(sirka,vyska));
+    painter->setBrush(QBrush(Qt::red)); //upravit
+    painter->setPen(Qt::red);
+    painter->drawPath(shape());
 }

@@ -26,7 +26,7 @@ QPainterPath Base::shape() const
 
 void Base::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(QBrush(Qt::black));
+    painter->setBrush(QBrush(Qt::black)); //upravit
     painter->setPen(Qt::black);
     painter->drawPath(shape());
     //QImage image("../Age-Of-Wars-master/base.png");//nazev je nazev souboru i s priponou
