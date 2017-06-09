@@ -5,9 +5,11 @@
 class Player : public QGraphicsItem
 {
 public:
-    Player();
+    Player(QString type);
     QRectF boundingRect() const;
     int speed = 2;
+    int cooldown;
+    int health;
 
 protected:
     QPainterPath shape() const;
