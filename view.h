@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QList>
 #include "player.h"
+#include "enemy.h"
 #include "base.h"
 #include "turret.h"
 #include "bullet.h"
@@ -19,8 +20,12 @@ public:
     void CreateTimer();
     enum gameStatus{menu,stopped,running};
     gameStatus status = menu;
-    void SpawnPlayer(bool isEnemy, QString type);
+    void SpawnPlayer(QString type);
+    void SpawnEnemy(QString type);
     void SpawnBase();
+    void MovePlayers();
+    void MoveEnemyPlayers();
+    void Collision();
 
 
 public slots:
@@ -35,10 +40,11 @@ private:
     int width;
     int height;
     Player *player;
+    Enemy *enemy;
     Base *mybase;
     Base *enemybase;
     QList<Player *> playerList;
-    QList<Player *> enemyList;
+    QList<Enemy *> enemyList;
 
     QTimer *timer;
     QGraphicsTextItem *scoreItem;

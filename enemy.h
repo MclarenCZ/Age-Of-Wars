@@ -1,11 +1,11 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef ENEMY_H
+#define ENEMY_H
 #include <QGraphicsItem>
 
-class Player : public QGraphicsItem
+class Enemy : public QGraphicsItem
 {
 public:
-    Player();
+    Enemy();
     QRectF boundingRect() const;
     int speed = 2;
 
@@ -18,4 +18,4 @@ private:
     int vyska = 30;
 };
 
-#endif // PLAYER_H
+#endif // ENEMY_H

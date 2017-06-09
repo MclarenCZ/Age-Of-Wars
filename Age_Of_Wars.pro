@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     base.cpp \
     turret.cpp \
     bullet.cpp \
-    camera.cpp
+    camera.cpp \
+    enemy.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     base.h \
     turret.h \
     bullet.h \
-    camera.h
+    camera.h \
+    enemy.h
 
 FORMS    += mainwindow.ui
