@@ -18,14 +18,21 @@ public:
     View();
     View(QGraphicsScene *scene);
     void CreateTimer();
-    enum gameStatus{menu,stopped,running};
-    gameStatus status = menu;
     void SpawnPlayer(QString type);
     void SpawnEnemy(QString type);
     void SpawnBase();
     void MovePlayers();
     void MoveEnemyPlayers();
     void Collision();
+
+    int sceneWidth;
+    int sceneHeight;
+    enum gameStatus{menu,stopped,running};
+    gameStatus status = menu;
+    int myHighScore;
+    QString myUsername;
+    int globalHighscoreScore;
+    QString globalHighscoreUsername;
 
 
 public slots:
@@ -37,20 +44,18 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
-    int width;
-    int height;
+    void CreateGame();
+
     Player *player;
     Enemy *enemy;
     Base *mybase;
     Base *enemybase;
-    QList<Player *> playerList;
-    QList<Enemy *> enemyList;
-
     QTimer *timer;
     QGraphicsTextItem *scoreItem;
     QGraphicsTextItem *gameOverItem;
 
-    void CreateGame();
+    QList<Player *> playerList;
+    QList<Enemy *> enemyList;
 
 signals:
 

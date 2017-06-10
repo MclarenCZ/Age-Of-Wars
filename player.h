@@ -10,6 +10,7 @@ public:
     int speed = 2;
     int cooldown;
     int health;
+    QString filename = "missing.png";
 
 protected:
     QPainterPath shape() const;
