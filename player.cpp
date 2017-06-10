@@ -6,88 +6,87 @@
 #include "view.h"
 #include "mainwindow.h"
 
-Player::Player(QString type)
+Player::Player(int type)
 {
     setTransformOriginPoint(sirka/2, sirka/2);
     switch (type) {
-    case "0-basic":
+    case 001:
         health = 100;
         cooldown = 5;//in sec
         break;
-    case "0-long":
+    case 002:
         health = 80;
         cooldown = 10;//in sec
         break;
-    case "0-high":
+    case 003:
         health = 150;
         cooldown = 15;//in sec
         break;
-    case "0-special":
+    case 004:
         health = 250;
         cooldown = 20;//in sec
         break;
-    case "1-basic":
+    case 011:
         health = 150;
         cooldown = 5;//in sec
         break;
-    case "1-long":
+    case 012:
         health = 130;
         cooldown = 10;//in sec
         break;
-    case "1-high":
+    case 013:
         health = 200;
         cooldown = 15;//in sec
         break;
-    case "1-special":
+    case 014:
         health = 300;
         cooldown = 20;//in sec
         break;
-    case "2-basic":
+    case 021:
         health = 200;
         cooldown = 5;//in sec
         break;
-    case "2-long":
+    case 022:
         health = 180;
         cooldown = 10;//in sec
         break;
-    case "2-high":
+    case 023:
         health = 250;
         cooldown = 15;//in sec
         break;
-    case "2-special":
+    case 024:
         health = 350;
         cooldown = 20;//in sec
         break;
-    case "3-basic":
+    case 031:
         health = 250;
         cooldown = 5;//in sec
         break;
-    case "3-long":
+    case 032:
         health = 230;
         cooldown = 10;//in sec
         break;
-    case "3-high":
+    case 033:
         health = 300;
         cooldown = 15;//in sec
         break;
-    case "3-special":
+    case 034:
         health = 400;
         cooldown = 20;//in sec
         break;
-    case "0-basic":
+    case 041:
         health = 300;
-        shield = 0;
         cooldown = 5;//in sec
         break;
-    case "0-long":
+    case 042:
         health = 280;
         cooldown = 10;//in sec
         break;
-    case "0-high":
+    case 043:
         health = 350;
         cooldown = 15;//in sec
         break;
-    case "0-special":
+    case 044:
         health = 450;
         cooldown = 20;//in sec
         break;

@@ -31,22 +31,20 @@ void View::CreateTimer()
 void View::SpawnPlayer(QString type)
 {
 
-    Player * player = new Player();
+    Player * player = new Player(type.toInt());
     this->scene()->addItem(player);
     playerList.append(player);
     player->setPos(150,100);
-    this->scene()->addItem(player);
 
 
 }
 
 void View::SpawnEnemy(QString type)
 {
-    Enemy * enemy = new Enemy();
+    Enemy * enemy = new Enemy(type.toInt());
     this->scene()->addItem(enemy);
     enemyList.append(enemy);
     enemy->setPos(850,100);
-    this->scene()->addItem(enemy);
 }
 
 void View::SpawnBase()
@@ -92,8 +90,8 @@ void View::ShowMenu()
     //potom s zobrazenym menu a tlacitky
     status = running;
     SpawnBase();
-    SpawnPlayer("default");
-    SpawnEnemy("default");
+    SpawnPlayer("001");//xx - level(age)(0 - 99), x - type(1 - 4)
+    SpawnEnemy("001");//xx - level(age)(0 - 99), x - type(1 - 4)
 }
 void View::Collision()
 {
@@ -105,7 +103,7 @@ void View::Collision()
             if(enemy){
                 qDebug() <<"Colide with enemy";
                 playerList[x]->speed = 0;
-                qDebug() <<"nice";
+//                qDebug() <<"nice";
             }
 
         }
@@ -116,9 +114,9 @@ void View::Collision()
         {
             Player * player=dynamic_cast<Player *>(i);
             if(player){
-                qDebug() <<"Colide with enemy";
+                qDebug() <<"Colide with player";
                 enemyList[x]->speed = 0;
-                qDebug() <<"nice";
+//                qDebug() <<"nice";
             }
 
         }

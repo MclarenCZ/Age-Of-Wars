@@ -5,9 +5,11 @@
 class Enemy : public QGraphicsItem
 {
 public:
-    Enemy();
+    Enemy(int type);
     QRectF boundingRect() const;
     int speed = 2;
+    int cooldown;
+    int health;
 
 protected:
     QPainterPath shape() const;

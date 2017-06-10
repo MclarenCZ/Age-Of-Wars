@@ -5,7 +5,7 @@
 class Player : public QGraphicsItem
 {
 public:
-    Player(QString type);
+    Player(int type);
     QRectF boundingRect() const;
     int speed = 2;
     int cooldown;
