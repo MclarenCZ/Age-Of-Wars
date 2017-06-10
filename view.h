@@ -24,6 +24,8 @@ public:
     void MovePlayers();
     void MoveEnemyPlayers();
     void Collision();
+    void DisplayControls();
+    void StartGame();
 
     int sceneWidth;
     int sceneHeight;

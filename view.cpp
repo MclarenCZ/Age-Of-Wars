@@ -17,7 +17,6 @@ View::View(QGraphicsScene *scene)
 {
     setScene(scene);//musi byt pred pouzitim this->scene()
     ShowMenu();
-    CreateTimer();
 
 }
 
@@ -88,10 +87,8 @@ void View::Update()
 void View::ShowMenu()
 {
     //potom s zobrazenym menu a tlacitky
-    status = running;
-    SpawnBase();
-    SpawnPlayer("001");//xx - level(age)(0 - 99), x - type(1 - 4)
-    SpawnEnemy("001");//xx - level(age)(0 - 99), x - type(1 - 4)
+    qDebug() << "zobrazení menu - docasne nepouzite";
+    StartGame();
 }
 void View::Collision()
 {
@@ -123,6 +120,22 @@ void View::Collision()
    }
 
 
+}
+
+void View::DisplayControls()
+{
+    qDebug() << "zobrazení ovládacích tlačítek";
+}
+
+void View::StartGame()
+{
+    qDebug() << "starting game";
+    status = running;
+    CreateTimer();
+    SpawnBase();
+
+    SpawnPlayer("001");//xx - level(age)(0 - 99), x - type(1 - 4)
+    SpawnEnemy("001");//xx - level(age)(0 - 99), x - type(1 - 4)
 }
 
 void View::keyPressEvent(QKeyEvent *event)
