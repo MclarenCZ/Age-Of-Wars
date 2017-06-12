@@ -8,7 +8,7 @@
 #include "base.h"
 #include "turret.h"
 #include "bullet.h"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 
 class View : public QGraphicsView

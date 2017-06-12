@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    View *view = new View(&scene);
+    view = new View(&scene);
 //    this->setCentralWidget(view);
     this->ui->verticalLayout->addWidget(view);
 }
@@ -32,30 +32,31 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_buttonStartGame_clicked()
 {
-    object.System("button startgame");
+//    object.System("button startgame");
+   view->System("button startgame");
 }
 
 void MainWindow::on_buttonPlayPause_clicked()
 {
-    object.System("button playpause");
+    view->System("button playpause");
 }
 
 void MainWindow::on_buttoSpawnBasic_clicked()
 {
-    object.System("spawn basic");
+    view->System("spawn basic");
 }
 
 void MainWindow::on_buttonSpawnLong_clicked()
 {
-    object.System("spawn long");
+    view->System("spawn long");
 }
 
 void MainWindow::on_buttonSpawnHigh_clicked()
 {
-    object.System("spawn high");
+    view->System("spawn high");
 }
 
 void MainWindow::on_buttonSpawnSpecial_clicked()
 {
-    object.System("spawn special");
+    view->System("spawn special");
 }

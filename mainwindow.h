@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <view.h>
+#include "view.h"
 #include <QGraphicsScene>
 
 namespace Ui {
@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    View object;
+    View *view;
 
 
 public slots:
