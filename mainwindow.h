@@ -21,6 +21,19 @@ public:
 public slots:
     void on_actionExit_triggered();
 
+private slots:
+    void on_buttonStartGame_clicked();
+
+    void on_buttonPlayPause_clicked();
+
+    void on_buttoSpawnBasic_clicked();
+
+    void on_buttonSpawnLong_clicked();
+
+    void on_buttonSpawnHigh_clicked();
+
+    void on_buttonSpawnSpecial_clicked();
+
 private:
      Ui::MainWindow *ui;
      QGraphicsScene scene;

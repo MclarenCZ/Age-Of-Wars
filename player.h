@@ -11,6 +11,7 @@ public:
     int cooldown;
     int health;
     QString filename = "missing.png";
+    bool isAttacking = false;
 
 protected:
     QPainterPath shape() const;

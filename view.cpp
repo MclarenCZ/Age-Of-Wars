@@ -79,8 +79,10 @@ void View::MoveEnemyPlayers()
 
 void View::Update()
 {
-    MovePlayers();
-    MoveEnemyPlayers();
+    if(playerList.length() != 0 && enemyList.length() != 0){
+        MovePlayers();
+        MoveEnemyPlayers();
+    }
     Collision();
 }
 
@@ -88,7 +90,7 @@ void View::ShowMenu()
 {
     //potom s zobrazenym menu a tlacitky
     qDebug() << "zobrazení menu - docasne nepouzite";
-    StartGame();
+//    StartGame();//na zkousku - funkce system
 }
 void View::Collision()
 {
@@ -124,7 +126,7 @@ void View::Collision()
 
 void View::DisplayControls()
 {
-    qDebug() << "zobrazení ovládacích tlačítek";
+    qDebug() << "zobrazení ovládacích tlačítek";//dodelat
 }
 
 void View::StartGame()
@@ -136,6 +138,29 @@ void View::StartGame()
 
     SpawnPlayer("001");//xx - level(age)(0 - 99), x - type(1 - 4)
     SpawnEnemy("001");//xx - level(age)(0 - 99), x - type(1 - 4)
+}
+
+void View::Attack()
+{
+
+}
+
+void View::System(QString data)
+{
+    QStringList list = data.split(" ");
+    if(list[0] == "button"){
+        if(list[1] == "startgame"){
+            StartGame();
+        }
+        else if(list[1] == "playpause"){
+            PauseGamse();
+        }
+    }
+}
+
+void View::PauseGamse()
+{
+    qDebug() << "pausing game";//dodelat
 }
 
 void View::keyPressEvent(QKeyEvent *event)
@@ -150,5 +175,5 @@ void View::keyReleaseEvent(QKeyEvent *event)
 
 void View::CreateGame()
 {
-
+    qDebug() << "creating game";//uvodni nastaveni hraci plochy //dodelat
 }

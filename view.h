@@ -26,6 +26,9 @@ public:
     void Collision();
     void DisplayControls();
     void StartGame();
+    void Attack();
+    void System(QString data);
+    void PauseGamse();
 
     int sceneWidth;
     int sceneHeight;
