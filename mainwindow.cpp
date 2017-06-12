@@ -32,30 +32,30 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_buttonStartGame_clicked()
 {
-    View::System("button startgame");
+    object.System("button startgame");
 }
 
 void MainWindow::on_buttonPlayPause_clicked()
 {
-    View::System("button playpause");
+    object.System("button playpause");
 }
 
 void MainWindow::on_buttoSpawnBasic_clicked()
 {
-    View::System("spawn basic");
+    object.System("spawn basic");
 }
 
 void MainWindow::on_buttonSpawnLong_clicked()
 {
-    View::System("spawn long");
+    object.System("spawn long");
 }
 
 void MainWindow::on_buttonSpawnHigh_clicked()
 {
-    View::System("spawn high");
+    object.System("spawn high");
 }
 
 void MainWindow::on_buttonSpawnSpecial_clicked()
 {
-    View::System("spawn special");
+    object.System("spawn special");
 }
