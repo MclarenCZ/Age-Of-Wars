@@ -20,6 +20,7 @@ protected:
 private:
     int sirka = 20;
     int vyska = 30;
+    QColor color = Qt::red;
 };
 
 #endif // PLAYER_H

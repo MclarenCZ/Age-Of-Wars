@@ -29,6 +29,7 @@ public:
     void Attack();
     void System(QString data);
     void PauseGamse();
+    void UnpauseGame();
 
     int sceneWidth;
     int sceneHeight;

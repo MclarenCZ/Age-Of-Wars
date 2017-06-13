@@ -87,7 +87,8 @@ void View::MoveEnemyPlayers()
 
 void View::Update()
 {
-    if(playerList.length() != 0 && enemyList.length() != 0){
+//    if(playerList.length() != 0 && enemyList.length() != 0){//na vyzkouseni kvuli bugu na zacatku
+    if(playerList.length() != 0 || enemyList.length() != 0){
         MovePlayers();
         MoveEnemyPlayers();
     }
@@ -102,7 +103,7 @@ void View::ShowMenu()
 }
 void View::Collision()
 {
-    for (int x = 0; x < playerList.length(); ++x) {
+    for (int x = 0; x < playerList.length(); ++x) {//kolize my player s enemy player
         QList<QGraphicsItem *> list = playerList[x]->collidingItems();
         foreach(QGraphicsItem * i, list)
         {
@@ -110,12 +111,11 @@ void View::Collision()
             if(enemy){
                 qDebug() <<"Colide with enemy";
                 playerList[x]->speed = 0;
-//                qDebug() <<"nice";
             }
 
         }
-   }
-    for (int x = 0; x < enemyList.length(); ++x) {
+    }
+    for (int x = 0; x < enemyList.length(); ++x) {//kolize enemy player s my player
         QList<QGraphicsItem *> list = enemyList[x]->collidingItems();
         foreach(QGraphicsItem * i, list)
         {
@@ -123,13 +123,34 @@ void View::Collision()
             if(player){
                 qDebug() <<"Colide with player";
                 enemyList[x]->speed = 0;
-//                qDebug() <<"nice";
             }
 
         }
-   }
+    }
+    for (int x = 0; x < playerList.length(); ++x) {//kolize my player s enemy base
+        QList<QGraphicsItem *> list = playerList[x]->collidingItems();
+        foreach(QGraphicsItem * i, list)
+        {
+            Base * enemyBase=dynamic_cast<Base *>(i);
+            if(enemyBase){
+                qDebug() <<"Colide with enemy base";
+                playerList[x]->speed = 0;
+            }
 
+        }
+    }
+    for (int x = 0; x < enemyList.length(); ++x) {//kolize enemy player s my base
+        QList<QGraphicsItem *> list = enemyList[x]->collidingItems();
+        foreach(QGraphicsItem * i, list)
+        {
+            Base * myBase=dynamic_cast<Base *>(i);
+            if(myBase){
+                qDebug() <<"Colide with my base";
+                enemyList[x]->speed = 0;
+            }
 
+        }
+    }
 }
 
 void View::DisplayControls()
@@ -143,9 +164,6 @@ void View::StartGame()
     status = running;
     CreateTimer();
     SpawnBase();
-
-    SpawnPlayer(001);
-    SpawnEnemy(001);
 }
 
 void View::Attack()
@@ -158,30 +176,55 @@ void View::System(QString data)
     QStringList list = data.split(" ");
     if(list[0] == "button"){
         if(list[1] == "startgame"){
-            StartGame();
+            if(status == menu){
+                StartGame();
+            }
         }
         else if(list[1] == "playpause"){
-            PauseGamse();
+            if(status == running){
+                status = stopped;
+               PauseGamse();
+            }
+            else if(status == stopped){
+                status = running;
+                UnpauseGame();
+            }
         }
     }else if(list[0] == "spawn"){
-        if(list[1] == "basic"){
-            SpawnPlayer(1);
+        if(status == running){
+            if(list[1] == "basic"){
+                SpawnPlayer(1);
+            }
+            else if(list[1] == "long"){
+                SpawnPlayer(2);
+            }
+            else if(list[1] == "high"){
+                SpawnPlayer(3);
+            }
+            else if(list[1] == "special"){
+                SpawnPlayer(4);
+            }
+            else{
+                qDebug() << "neznamy parametr funkce spawn";
+            }
         }
-        else if(list[1] == "basic"){
-            SpawnPlayer(2);
+        else{
+            qDebug() << "nemuzes klikat na useles tlacitka";
         }
-        else if(list[1] == "special"){
-            SpawnPlayer(3);
-        }
-        else if(list[1] == "special"){
-            SpawnPlayer(4);
-        }
+    }
+    else{
+        qDebug() << "neznama funkce";
     }
 }
 
 void View::PauseGamse()
 {
-    qDebug() << "pausing game";//dodelat
+    qDebug() << "pausing game";
+}
+
+void View::UnpauseGame()
+{
+    qDebug() << "resumming game";
 }
 
 void View::keyPressEvent(QKeyEvent *event)

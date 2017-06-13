@@ -14,21 +14,25 @@ Player::Player(int type)
         health = 100;
         cooldown = 5;//in sec
         filename = "0-basic.png";
+        color = Qt::red;
         break;
     case 002:
         health = 80;
         cooldown = 10;//in sec
         filename = "0-long.png";
+        color = Qt::green;
         break;
     case 003:
         health = 150;
         cooldown = 15;//in sec
         filename = "0-high.png";
+        color = Qt::blue;
         break;
     case 004:
         health = 250;
         cooldown = 20;//in sec
         filename = "0-special.png";
+        color = Qt::yellow;
         break;
     case 011:
         health = 150;
@@ -129,7 +133,7 @@ QPainterPath Player::shape() const
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(QBrush(Qt::red)); //upravit
+    painter->setBrush(QBrush(color)); //upravit
     painter->setPen(Qt::red);
     painter->drawPath(shape());
 //    QImage image("../Textures/" + filename);
