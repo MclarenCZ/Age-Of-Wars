@@ -6,6 +6,9 @@
 #include <QOpenGLWidget>
 #include <QProcess>
 #include <QApplication>
+#include <QPainter>
+#include <QPicture>
+#include <QPixmap>
 
 
 View::View()
@@ -16,6 +19,10 @@ View::View()
 View::View(QGraphicsScene *scene)
 {
     setScene(scene);//musi byt pred pouzitim this->scene()
+    sceneWidth = 800;
+    sceneHeight = 600;
+    QPixmap image("../Textures/back.png");
+    scene->setBackgroundBrush(image.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ShowMenu();
 
 }
@@ -27,10 +34,10 @@ void View::CreateTimer()
     timer->start(30);
 }
 
-void View::SpawnPlayer(QString type)
+void View::SpawnPlayer(int type)
 {
-
-    Player * player = new Player(type.toInt());
+    int typeNew = type + (age * 10);
+    Player * player = new Player(typeNew);
     this->scene()->addItem(player);
     playerList.append(player);
     player->setPos(150,100);
@@ -38,9 +45,10 @@ void View::SpawnPlayer(QString type)
 
 }
 
-void View::SpawnEnemy(QString type)
+void View::SpawnEnemy(int type)
 {
-    Enemy * enemy = new Enemy(type.toInt());
+    int typeNew = type + (age * 10);
+    Enemy * enemy = new Enemy(typeNew);
     this->scene()->addItem(enemy);
     enemyList.append(enemy);
     enemy->setPos(850,100);
@@ -136,8 +144,8 @@ void View::StartGame()
     CreateTimer();
     SpawnBase();
 
-    SpawnPlayer("001");//xx - level(age)(0 - 99), x - type(1 - 4)
-    SpawnEnemy("001");//xx - level(age)(0 - 99), x - type(1 - 4)
+    SpawnPlayer(001);
+    SpawnEnemy(001);
 }
 
 void View::Attack()
@@ -154,6 +162,19 @@ void View::System(QString data)
         }
         else if(list[1] == "playpause"){
             PauseGamse();
+        }
+    }else if(list[0] == "spawn"){
+        if(list[1] == "basic"){
+            SpawnPlayer(1);
+        }
+        else if(list[1] == "basic"){
+            SpawnPlayer(2);
+        }
+        else if(list[1] == "special"){
+            SpawnPlayer(3);
+        }
+        else if(list[1] == "special"){
+            SpawnPlayer(4);
         }
     }
 }

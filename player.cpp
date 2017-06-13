@@ -132,6 +132,6 @@ void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->setBrush(QBrush(Qt::red)); //upravit
     painter->setPen(Qt::red);
     painter->drawPath(shape());
-//    QImage image("../Age-Of-Wars-master/" + filename);
+//    QImage image("../Textures/" + filename);
     //painter->drawImage(QPoint(0,0),image.scaled(sirka,vyska));
 }

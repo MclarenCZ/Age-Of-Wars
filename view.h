@@ -18,8 +18,8 @@ public:
     View();
     View(QGraphicsScene *scene);
     void CreateTimer();
-    void SpawnPlayer(QString type);
-    void SpawnEnemy(QString type);
+    void SpawnPlayer(int type);
+    void SpawnEnemy(int type);
     void SpawnBase();
     void MovePlayers();
     void MoveEnemyPlayers();
@@ -38,6 +38,7 @@ public:
     QString myUsername;
     int globalHighscoreScore;
     QString globalHighscoreUsername;
+    int age = 0;
 
 
 public slots:
