@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
     view = new View(&scene);
 //    this->setCentralWidget(view);
     this->ui->verticalLayout->addWidget(view);
+
+    timerFps = new QTimer(this);
+    connect(timerFps, SIGNAL(timeout()), this, SLOT(FpsCounter()));
+    timerFps->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +32,12 @@ void MainWindow::on_actionExit_triggered()
 {
 //    this->CloseApplication();
     this->close();
+}
+
+void MainWindow::FpsCounter()
+{
+    qDebug() << view->frames << "FPS";
+    view->frames = 0;
 }
 
 void MainWindow::on_buttonStartGame_clicked()

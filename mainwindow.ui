@@ -34,7 +34,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="labelPlayer">
           <property name="text">
            <string>Player name: unnamed</string>
           </property>
@@ -48,7 +48,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="labelScore">
           <property name="text">
            <string>Score: 000</string>
           </property>

@@ -92,6 +92,7 @@ void View::Update()
         MovePlayers();
         MoveEnemyPlayers();
     }
+    frames++;//pocitani framu pro fps
     Collision();
 }
 
@@ -101,6 +102,7 @@ void View::ShowMenu()
     Background *background = new Background("0-background.png",sceneWidth,sceneHeight);
     this->scene()->addItem(background);
 }
+
 void View::Collision()
 {
     for (int x = 0; x < playerList.length(); ++x) {//kolize my player s enemy player

@@ -42,7 +42,8 @@ public:
     QString globalHighscoreUsername;
     int age = 0;
     int playerEntityLimit = 25;
-    int timerUpdateTime = 50;
+    int timerUpdateTime = 25;
+    int frames = 0;
 
 public slots:
     void Update();

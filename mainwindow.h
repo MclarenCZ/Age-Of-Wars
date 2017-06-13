@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "view.h"
 #include <QGraphicsScene>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,7 @@ public:
 
 public slots:
     void on_actionExit_triggered();
+    void FpsCounter();
 
 private slots:
     void on_buttonStartGame_clicked();
@@ -38,6 +40,7 @@ private slots:
 private:
      Ui::MainWindow *ui;
      QGraphicsScene scene;
+     QTimer *timerFps;
 };
 
 #endif // MAINWINDOW_H
