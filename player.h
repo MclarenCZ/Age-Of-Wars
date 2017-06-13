@@ -12,14 +12,14 @@ public:
     int health;
     QString filename = "missing.png";
     bool isAttacking = false;
+    int sirka = 20;
+    int vyska = 30;
 
 protected:
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
-    int sirka = 20;
-    int vyska = 30;
     QColor color = Qt::red;
 };
 

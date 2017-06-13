@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include "base.h"
 #include "turret.h"
+#include "background.h"
 #include "bullet.h"
 //#include "mainwindow.h"
 
@@ -40,7 +41,8 @@ public:
     int globalHighscoreScore;
     QString globalHighscoreUsername;
     int age = 0;
-
+    int playerEntityLimit = 25;
+    int timerUpdateTime = 50;
 
 public slots:
     void Update();
@@ -52,15 +54,14 @@ protected:
 
 private:
     void CreateGame();
-
     Player *player;
     Enemy *enemy;
     Base *mybase;
     Base *enemybase;
+    Background *background;
     QTimer *timer;
     QGraphicsTextItem *scoreItem;
     QGraphicsTextItem *gameOverItem;
-
     QList<Player *> playerList;
     QList<Enemy *> enemyList;
 

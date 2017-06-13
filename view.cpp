@@ -18,11 +18,11 @@ View::View()
 
 View::View(QGraphicsScene *scene)
 {
-    setScene(scene);//musi byt pred pouzitim this->scene()
-    sceneWidth = 800;
-    sceneHeight = 600;
-    QPixmap image("../Textures/back.png");
-    scene->setBackgroundBrush(image.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    setScene(scene);
+    sceneWidth = 5760 / 4;
+    sceneHeight = 1080 / 4;
+//    QPixmap image("../Textures/back.png");
+//    scene->setBackgroundBrush(image.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ShowMenu();
 
 }
@@ -31,7 +31,7 @@ void View::CreateTimer()
 {
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(Update()));
-    timer->start(30);
+    timer->start(timerUpdateTime);
 }
 
 void View::SpawnPlayer(int type)
@@ -40,7 +40,7 @@ void View::SpawnPlayer(int type)
     Player * player = new Player(typeNew);
     this->scene()->addItem(player);
     playerList.append(player);
-    player->setPos(150,100);
+    player->setPos(150,sceneHeight - 150);
 
 
 }
@@ -51,7 +51,7 @@ void View::SpawnEnemy(int type)
     Enemy * enemy = new Enemy(typeNew);
     this->scene()->addItem(enemy);
     enemyList.append(enemy);
-    enemy->setPos(850,100);
+    enemy->setPos(sceneWidth - 150 - enemy->sirka,sceneHeight - 150);
 }
 
 void View::SpawnBase()
@@ -59,9 +59,9 @@ void View::SpawnBase()
     Base *myBase = new Base();
     Base *enemyBase = new Base();
     this->scene()->addItem(myBase);
-    myBase->setPos(0,100);//upravit
+    myBase->setPos(0,sceneHeight - 100);
     this->scene()->addItem(enemyBase);
-    enemyBase->setPos(1000,100);//upravit
+    enemyBase->setPos(sceneWidth - enemyBase->sirka,sceneHeight - 100);
 }
 
 void View::MovePlayers()
@@ -97,9 +97,9 @@ void View::Update()
 
 void View::ShowMenu()
 {
-    //potom s zobrazenym menu a tlacitky
-    qDebug() << "zobrazení menu - docasne nepouzite";
-//    StartGame();//na zkousku - funkce system
+    qDebug() << "INFO: zobrazuji menu";
+    Background *background = new Background("0-background.png",sceneWidth,sceneHeight);
+    this->scene()->addItem(background);
 }
 void View::Collision()
 {
@@ -155,12 +155,12 @@ void View::Collision()
 
 void View::DisplayControls()
 {
-    qDebug() << "zobrazení ovládacích tlačítek";//dodelat
+
 }
 
 void View::StartGame()
 {
-    qDebug() << "starting game";
+    qDebug() << "INFO: starting game";
     status = running;
     CreateTimer();
     SpawnBase();
@@ -192,39 +192,48 @@ void View::System(QString data)
         }
     }else if(list[0] == "spawn"){
         if(status == running){
-            if(list[1] == "basic"){
-                SpawnPlayer(1);
-            }
-            else if(list[1] == "long"){
-                SpawnPlayer(2);
-            }
-            else if(list[1] == "high"){
-                SpawnPlayer(3);
-            }
-            else if(list[1] == "special"){
-                SpawnPlayer(4);
+            if((playerList.length() + enemyList.length()) <= playerEntityLimit){
+                if(list[1] == "basic"){
+                    qDebug() << "INFO: spawnut player basic";
+                    SpawnPlayer(1);
+                }
+                else if(list[1] == "long"){
+                    qDebug() << "INFO: spawnut player long";
+                    SpawnPlayer(2);
+                }
+                else if(list[1] == "high"){
+                    qDebug() << "INFO: spawnut player high";
+                    SpawnPlayer(3);
+                }
+                else if(list[1] == "special"){
+                    qDebug() << "INFO: spawnut player special";
+                    SpawnPlayer(4);
+                }
+                else{
+                    qDebug() << "ERROR: neznamy parametr funkce spawn";
+                }
             }
             else{
-                qDebug() << "neznamy parametr funkce spawn";
+                qDebug() << "INFO: nelze spawnout dalsi entitu - dosazen limit";
             }
         }
         else{
-            qDebug() << "nemuzes klikat na useles tlacitka";
+            qDebug() << "INFO: nemuzes klikat na useles tlacitka";
         }
     }
     else{
-        qDebug() << "neznama funkce";
+        qDebug() << "ERROR: neznama funkce";
     }
 }
 
 void View::PauseGamse()
 {
-    qDebug() << "pausing game";
+    qDebug() << "INFO: pausing game";
 }
 
 void View::UnpauseGame()
 {
-    qDebug() << "resumming game";
+    qDebug() << "INFO: resumming game";
 }
 
 void View::keyPressEvent(QKeyEvent *event)
@@ -239,5 +248,5 @@ void View::keyReleaseEvent(QKeyEvent *event)
 
 void View::CreateGame()
 {
-    qDebug() << "creating game";//uvodni nastaveni hraci plochy //dodelat
+    qDebug() << "INFO: creating game";
 }
