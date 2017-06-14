@@ -118,8 +118,13 @@ void View::Collision()
             if(enemy){
                 qDebug() <<"Colide with enemy";
                 playerList[x]->speed = 0;
-            }
+                if(enemy->health <= 0){
+                    scene()->removeItem(enemy);
+                       playerList[i]->speed = 2;
 
+                }
+                enemy->health = enemy->health - playerList[x]->damage/10;
+            }
         }
     }
     for (int x = 0; x < enemyList.length(); ++x) {//kolize enemy player s my player
@@ -164,8 +169,10 @@ void View::Collision()
         {
             Player * player=dynamic_cast<Player *>(i);
             if(player){
-                qDebug() <<"Colide with enemy";
-                playerList[x]->speed = 0;
+                if(player->pos().x()>playerList[x]->pos().x())
+                   playerList[x]->speed = 0;
+
+                qDebug() <<"Colide with my playerrfgrdg";
             }
 
         }
@@ -215,6 +222,7 @@ void View::System(QString data)
                 if(list[1] == "basic"){
                     qDebug() << "INFO: spawnut player basic";
                     SpawnPlayer(1);
+                    SpawnEnemy(1);
                     cooldown = 0;
                 }
                 else if(list[1] == "long"){

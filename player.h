@@ -10,10 +10,12 @@ public:
     int speed = 2;
     int cooldown;
     int health;
+    int damage;
     QString filename = "missing.png";
     bool isAttacking = false;
     int sirka = 20;
     int vyska = 30;
+
 
 protected:
     QPainterPath shape() const;
