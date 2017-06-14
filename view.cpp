@@ -19,8 +19,10 @@ View::View()
 View::View(QGraphicsScene *scene)
 {
     setScene(scene);
-    sceneWidth = 5760 / 4;
-    sceneHeight = 1080 / 4;
+//    sceneWidth = 5760 / 2;
+//    sceneHeight = 1080 / 2;
+    sceneWidth = 1440;
+    sceneHeight = 540;
 //    QPixmap image("../Textures/back.png");
 //    scene->setBackgroundBrush(image.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ShowMenu();
@@ -40,8 +42,7 @@ void View::SpawnPlayer(int type)
     Player * player = new Player(typeNew);
     this->scene()->addItem(player);
     playerList.append(player);
-    player->setPos(150,sceneHeight - 150);
-
+    player->setPos(150,sceneHeight - 50);
 
 }
 
@@ -51,7 +52,7 @@ void View::SpawnEnemy(int type)
     Enemy * enemy = new Enemy(typeNew);
     this->scene()->addItem(enemy);
     enemyList.append(enemy);
-    enemy->setPos(sceneWidth - 150 - enemy->sirka,sceneHeight - 150);
+    enemy->setPos(sceneWidth - 150 - enemy->sirka,sceneHeight - 50);
 }
 
 void View::SpawnBase()
@@ -93,6 +94,10 @@ void View::Update()
         MoveEnemyPlayers();
     }
     frames++;//pocitani framu pro fps
+    if(cooldown<50){
+        cooldown++;
+//        qDebug()<<cooldown;
+    }
     Collision();
 }
 
@@ -153,6 +158,18 @@ void View::Collision()
 
         }
     }
+    for (int x = 0; x < playerList.length(); ++x) {//kolize my player s myplayer
+        QList<QGraphicsItem *> list = playerList[x]->collidingItems();
+        foreach(QGraphicsItem * i, list)
+        {
+            Player * player=dynamic_cast<Player *>(i);
+            if(player){
+                qDebug() <<"Colide with enemy";
+                playerList[x]->speed = 0;
+            }
+
+        }
+    }
 }
 
 void View::DisplayControls()
@@ -194,29 +211,33 @@ void View::System(QString data)
         }
     }else if(list[0] == "spawn"){
         if(status == running){
-            if((playerList.length() + enemyList.length()) <= playerEntityLimit){
+            if((playerList.length() + enemyList.length()) <= playerEntityLimit && cooldown >= 50){
                 if(list[1] == "basic"){
                     qDebug() << "INFO: spawnut player basic";
                     SpawnPlayer(1);
+                    cooldown = 0;
                 }
                 else if(list[1] == "long"){
                     qDebug() << "INFO: spawnut player long";
                     SpawnPlayer(2);
+                    cooldown = 0;
                 }
                 else if(list[1] == "high"){
                     qDebug() << "INFO: spawnut player high";
                     SpawnPlayer(3);
+                    cooldown = 0;
                 }
                 else if(list[1] == "special"){
                     qDebug() << "INFO: spawnut player special";
                     SpawnPlayer(4);
+                    cooldown = 0;
                 }
                 else{
                     qDebug() << "ERROR: neznamy parametr funkce spawn";
                 }
             }
             else{
-                qDebug() << "INFO: nelze spawnout dalsi entitu - dosazen limit";
+                qDebug() << "INFO: nelze spawnout dalsi entitu - dosazen limit / cooldown";
             }
         }
         else{

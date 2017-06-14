@@ -28,9 +28,9 @@ QPainterPath Background::shape() const
 
 void Background::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(QBrush(Qt::black)); //upravit
+    QImage image("../Textures/" + file);
+    painter->setBrush((QPoint(0,0),image/*.scaled(sirka,vyska)*/)); //upravit
     painter->setPen(Qt::black);
     painter->drawPath(shape());
-    QImage image("../Textures/" + file);
-    painter->drawImage(QPoint(0,0),image.scaled(sirka,vyska));
+//    painter->drawImage(QPoint(0,0),image/*.scaled(sirka,vyska)*/);
 }
