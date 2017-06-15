@@ -120,7 +120,7 @@ void View::Collision()
                 playerList[x]->speed = 0;
                 if(enemy->health <= 0){
                     scene()->removeItem(enemy);
-                       playerList[i]->speed = 2;
+                       playerList[x]->speed = 2;
 
                 }
                 enemy->health = enemy->health - playerList[x]->damage/10;
