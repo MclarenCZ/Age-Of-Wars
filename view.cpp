@@ -11,6 +11,7 @@
 #include <QPixmap>
 
 
+
 View::View()
 {
 
@@ -18,14 +19,17 @@ View::View()
 
 View::View(QGraphicsScene *scene)
 {
+//    this->setViewport(new QOpenGLWidget(this));
     setScene(scene);
+
 //    sceneWidth = 5760 / 2;
 //    sceneHeight = 1080 / 2;
     sceneWidth = 1440;
     sceneHeight = 540;
-//    QPixmap image("../Textures/back.png");
-//    scene->setBackgroundBrush(image.scaled(sceneWidth,sceneHeight,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    scene->addRect(0,0,sceneWidth,sceneHeight);
+
     ShowMenu();
+
 
 }
 
@@ -104,18 +108,22 @@ void View::Update()
 void View::ShowMenu()
 {
     qDebug() << "INFO: zobrazuji menu";
-    Background *background = new Background("0-background.png",sceneWidth,sceneHeight);
-    this->scene()->addItem(background);
+
 }
 
 void View::Collision()
 {
     for (int x = 0; x < playerList.length(); ++x) {//kolize my player s enemy player
+        bool coliding = false;
         QList<QGraphicsItem *> list = playerList[x]->collidingItems();
         foreach(QGraphicsItem * i, list)
         {
+
+            Player * player=dynamic_cast<Player *>(i);
             Enemy * enemy=dynamic_cast<Enemy *>(i);
+            Base * enemyBase=dynamic_cast<Base *>(i);
             if(enemy){
+                coliding = true;
                 qDebug() <<"Colide with enemy";
                 playerList[x]->speed = 0;
                 if(enemy->health <= 0){
@@ -125,6 +133,28 @@ void View::Collision()
                 }
                 enemy->health = enemy->health - playerList[x]->damage/10;
             }
+            if(player){
+                playerList[x]->speed = 0;
+                if(player->pos().x()<playerList[x]->pos().x()){
+                   playerList[x]->speed = 2;
+                }
+
+                qDebug() <<"Colide with my player";
+            }
+            if(enemyBase){
+                coliding = true;
+                qDebug() <<"Colide with enemy base";
+                playerList[x]->speed = 0;
+                scene()->removeItem(playerList[x]);
+
+            }
+            if(coliding = false){
+                playerList[x]->speed = 2;
+            }
+
+        }
+        if(coliding = false){
+            playerList[x]->speed = 2;
         }
     }
     for (int x = 0; x < enemyList.length(); ++x) {//kolize enemy player s my player
@@ -132,47 +162,19 @@ void View::Collision()
         foreach(QGraphicsItem * i, list)
         {
             Player * player=dynamic_cast<Player *>(i);
+            Base * myBase=dynamic_cast<Base *>(i);
+            Enemy * enemy=dynamic_cast<Enemy *>(i);
             if(player){
                 qDebug() <<"Colide with player";
                 enemyList[x]->speed = 0;
             }
-
-        }
-    }
-    for (int x = 0; x < playerList.length(); ++x) {//kolize my player s enemy base
-        QList<QGraphicsItem *> list = playerList[x]->collidingItems();
-        foreach(QGraphicsItem * i, list)
-        {
-            Base * enemyBase=dynamic_cast<Base *>(i);
-            if(enemyBase){
-                qDebug() <<"Colide with enemy base";
-                playerList[x]->speed = 0;
-            }
-
-        }
-    }
-    for (int x = 0; x < enemyList.length(); ++x) {//kolize enemy player s my base
-        QList<QGraphicsItem *> list = enemyList[x]->collidingItems();
-        foreach(QGraphicsItem * i, list)
-        {
-            Base * myBase=dynamic_cast<Base *>(i);
             if(myBase){
                 qDebug() <<"Colide with my base";
                 enemyList[x]->speed = 0;
             }
-
-        }
-    }
-    for (int x = 0; x < playerList.length(); ++x) {//kolize my player s myplayer
-        QList<QGraphicsItem *> list = playerList[x]->collidingItems();
-        foreach(QGraphicsItem * i, list)
-        {
-            Player * player=dynamic_cast<Player *>(i);
-            if(player){
-                if(player->pos().x()>playerList[x]->pos().x())
-                   playerList[x]->speed = 0;
-
-                qDebug() <<"Colide with my playerrfgrdg";
+            if(enemy){
+                qDebug() <<"Colide with my base";
+                enemyList[x]->speed = 0;
             }
 
         }
@@ -275,6 +277,16 @@ void View::keyPressEvent(QKeyEvent *event)
 void View::keyReleaseEvent(QKeyEvent *event)
 {
 
+}
+
+void View::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    painter->save();
+    QPixmap pix("../Textures/0-background.png");
+    QImage image = pix.toImage();
+  //  painter->drawImage(-sceneWidth/2,-sceneHeight/2, image);
+      painter->drawImage(0,0, image);
+    painter->restore();
 }
 
 void View::CreateGame()

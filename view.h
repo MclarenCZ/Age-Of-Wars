@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <QKeyEvent>
 #include <QList>
+
 #include "player.h"
 #include "enemy.h"
 #include "base.h"
@@ -10,6 +11,8 @@
 #include "background.h"
 #include "bullet.h"
 //#include "mainwindow.h"
+
+class QPainter;
 
 
 class View : public QGraphicsView
@@ -42,7 +45,7 @@ public:
     QString globalHighscoreUsername;
     int age = 0;
     int playerEntityLimit = 10;
-    int timerUpdateTime = 25;
+    int timerUpdateTime = 10;
     int frames = 0;
     int cooldown = 50;
 
@@ -53,6 +56,7 @@ public slots:
 protected:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    virtual void drawBackground(QPainter *painter, const QRectF &rect);
 
 private:
     void CreateGame();
